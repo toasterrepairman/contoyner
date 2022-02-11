@@ -3,9 +3,14 @@ use std::env;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    match args[1].as_str() {
-        "run" => run(&args[2]),
-        _ => println!("Try invoking a command like 'run'{}", args[1])
+    if args.len() > 1 { 
+        match args[1].as_str() {
+            "run" => run(&args[2]),
+            _ => println!("Try invoking a command like 'run'\n{} not understood", args[1])
+        }
+    }
+    else {
+        println!("No args detected")
     }
 }
 
