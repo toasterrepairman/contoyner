@@ -1,4 +1,5 @@
 use std::os::unix;
+use std::str::from_utf8;
 use std::env;
 
 fn main() {
@@ -15,8 +16,9 @@ fn main() {
 }
 
 fn run(command: &String) {
-    println!("Running {}!", &command);
-    std::process::Command::new(command)
+    println!("Running {}!\nOutput resumes below", &command);
+    let output = std::process::Command::new(command)
         .output()
         .expect("Could not launch program");
+    println!("{:?}", from_utf8(&output.stdout));
 }
